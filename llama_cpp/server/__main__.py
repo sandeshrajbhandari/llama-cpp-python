@@ -43,13 +43,28 @@ if __name__ == "__main__":
             help=description,
         )
 
+    parser.add_argument(
+            f"--use_ngrok",
+            dest=use_ngrok,
+            type=bool,
+            help="use ngrok public url or not",
+        )
     args = parser.parse_args()
-    settings = Settings(**{k: v for k, v in vars(args).items() if v is not None})
+    ## if args has use_ngrok value then remove it from args array
+    use_ngrok = False ## default
+    k_v_dict = {k: v for k, v in vars(args).items() if v is not None}
+    ## remove use_ngrok from k_v_dict
+    if "use_ngrok" in k_v_dict:
+        use_ngrok = k_v_dict["use_ngrok"]
+        del k_v_dict["use_ngrok"] ## del keyword is used to delete a key from dictionary
+    settings = Settings(**k_v_dict)
+
     app = create_app(settings=settings)
 
-    ngrok_tunnel = ngrok.connect(int(os.getenv("PORT", settings.port)))
-    print('Public URL:', ngrok_tunnel.public_url)
-    nest_asyncio.apply()
+    if use_ngrok:
+        ngrok_tunnel = ngrok.connect(int(os.getenv("PORT", settings.port)))
+        print('Public URL:', ngrok_tunnel.public_url)
+        nest_asyncio.apply()
     uvicorn.run(
         app, host=os.getenv("HOST", settings.host), port=int(os.getenv("PORT", settings.port))
     )

@@ -82,9 +82,9 @@ class Settings(BaseSettings):
     port: int = Field(
         default=8000, description="Listen port"
     )
-    use_ngrok: bool = Field(
-        default=False, description="use Ngrok for public url api."
-    )
+    # use_ngrok: bool = Field(
+    #     default=False, description="use Ngrok for public url api."
+    # ) ## error occurred in Pydantice validation 
 
 router = APIRouter()
 
