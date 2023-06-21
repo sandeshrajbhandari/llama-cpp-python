@@ -25,6 +25,8 @@ import os
 import argparse
 
 import uvicorn
+from pyngrok import ngrok
+import nest_asyncio
 
 from llama_cpp.server.app import create_app, Settings
 
@@ -45,6 +47,9 @@ if __name__ == "__main__":
     settings = Settings(**{k: v for k, v in vars(args).items() if v is not None})
     app = create_app(settings=settings)
 
+    ngrok_tunnel = ngrok.connect(int(os.getenv("PORT", settings.port)))
+    print('Public URL:', ngrok_tunnel.public_url)
+    nest_asyncio.apply()
     uvicorn.run(
         app, host=os.getenv("HOST", settings.host), port=int(os.getenv("PORT", settings.port))
     )
