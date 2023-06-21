@@ -45,7 +45,6 @@ if __name__ == "__main__":
 
     parser.add_argument(
             f"--use_ngrok",
-            dest=use_ngrok,
             type=bool,
             help="use ngrok public url or not",
         )
