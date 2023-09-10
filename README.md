@@ -2,8 +2,12 @@
 Fork of llama-cpp-python to enable ngrok routing to get a public url of the api.
 very basic implementation used to work with colab notebook to host language models while testing the api in my local environment. Its useful for anyone who doesn't have a local GPU capable of hosting large models. Also useful if you don't have an OpenAI subscription and want to work with large language models.
 Check this colab notebook using this repo to create a public endpoint. [llama_cpp_python_alpha.ipynb](https://github.com/sandeshrajbhandari/llama-cpp-python/blob/main/llama_cpp_python_alpha.ipynb)
-![](ngrok-api-screenshots/code-changes-in-colab.png) ![](ngrok-api-screenshots/testing-embedding-api-endpoint.png)
 
+| ![api working in ngrok](ngrok-api-screenshots/testing-api-endpoint-postman.png) | ![embedding api](ngrok-api-screenshots/testing-embedding-api-endpoint.png) |
+|:---:|:---:|
+| *testing-api-endpoint-postman.png* | *testing-embedding-api-endpoint.png* |
+| ![colab view](ngrok-api-screenshots/code-changes-in-colab.png) |  |
+| *code-changes-in-colab.png* | |
 
 # 🦙 Python Bindings for `llama.cpp`
 
